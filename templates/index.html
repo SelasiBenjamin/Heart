@@ -9,160 +9,178 @@
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-		<link rel="icon" type="image/png" href="../assets/favicon.png"/>
+		<link rel="icon" type="image/png" href="..static/favicon.png"/>
+
+		<link rel="stylesheet" href="../static/assets/css/maicons.css">
+
+		<link rel="stylesheet" href="../static/assets/css/bootstrap.css">
+	  
+		<link rel="stylesheet" href="../static/assets/vendor/owl-carousel/css/owl.carousel.css">
+	  
+		<link rel="stylesheet" href="../static/assets/vendor/animate/animate.css">
+	  
+		<link rel="stylesheet" href="../static/assets/css/theme.css">
+	  
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
 
 	<title>Heart Disease Test</title>
 </head>
 
-<body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container">
-			<a class="navbar-brand" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
-				<path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
-			  </svg>
- 				Heart Disease Web Application</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+<body style="background-image: url(../static/assets/img/bg_image_6.jpg);">
+	<header style="background-color: #ffffff;">
+
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+  <div class="container">
+	<a class="navbar-brand" href="#"><i class="fa fa-heartbeat" style="font-size:60px;color:red">
+	<span class="text-dark">Heart</span>-101</i></a>
+
+	<div class="collapse navbar-collapse" id="navbarSupport">
+	  <ul class="navbar-nav ml-auto">
+		<li class="nav-item active">
+		  <a class="nav-link" href="{{ url_for('home') }}"><strong>Home</strong></a>
+		</li>
+
+
+	  </ul>
+	</div> <!-- .navbar-collapse -->
+  </div> <!-- .container -->
+</nav>
+</header>
+
+
+
+<div class="container" style="max-width:600px;margin:60px auto;">
+
+	<div class="card  mt-4" >
+		<div class="card-header">
+			Fill out this form to know about your heart disease risk condition
 		</div>
+		
+		<div class="card-body">
+			<form action="{{url_for('predict')}}" method="POST">
 
-	</nav>
-	<div class="container">
-
-		<div class="card  mt-4">
-			<div class="card-header">
-				Fill out this application form to know about your heart disease risk
-			</div>
-			<div class="card-body">
-				<form action="{{url_for('predict')}}" method="POST">
-
-					<div class="form-group  row">
-						<div class="col-sm-3">
-							<label for="age">Age</label>
-							<input type="number" class="form-control" id="age" name="age" required>
-						</div>
-						<div class="col-sm-3">
-							<label for="sex">Sex</label>
-							<select class="form-control" id="sex" name="sex" required>
-								<option disabled selected value> -- Select an Option -- </option>
-								<option value="0">Male</option>
-								<option value="1">Female</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="form-group  row">
-						<div class="col-sm">
-							<label for="cp">Chest Pain Type</label>
-							<select class="form-control" id="cp" name="cp" required>
-								<option disabled selected value> -- Select an Option -- </option>
-								<option value="0">Typical Angina</option>
-								<option value="1">Atypical Angina</option>
-								<option value="2">Non-anginal Pain</option>
-								<option value="3">Asymptomatic</option>
-							</select>
-						</div>
-						<div class="col-sm">
-							<label for="trestbps">Resting Blood Pressure in mm Hg</label>
-							<input type="number" class="form-control" id="trestbps" name="trestbps" required>
-						</div>
-						<div class="col-sm">
-							<label for="chol">Serum Cholestoral in mg/dl</label>
-							<input type="number" class="form-control" id="chol" name="chol" required>
-						</div>
-						<div class="col-sm">
-							<label for="fbs">Fasting Blood Sugar > 120 mg/dl</label>
-							<select class="form-control" id="fbs" name="fbs" required>
-								<option disabled selected value> -- Select an Option -- </option>
-								<option value="0">False</option>
-								<option value="1">True</option>
-							</select>
-						</div>
-					</div>
-
-					<br>
-					<div class="form-group row">
-						<div class="col-sm">
-							<label for="restecg">Resting ECG Results </label>
-							<select class="form-control" id="restecg" name="restecg" required>
-								<option disabled selected value> -- Select an Option -- </option>
-								<option value="0">Normal</option>
-								<option value="1">Having ST-T wave abnormality </option>
-								<option value="2"> Probable or definite left ventricular hypertrophy </option>
-							</select>
-						</div>
-						<div class="col-sm">
-							<label for="thalach">Maximum Heart Rate</label>
-							<input type="number" class="form-control" id="thalach" name="thalach" required>
-						</div>
-						<div class="col-sm">
-							<label for="exang">ST Depression Induced</label>
-							<input type="number" step="any" class="form-control" id="exang" name="exang" required>
-						</div>
-						<div class="col-sm">
-							<label for="exang">Exercise Induced Angina </label>
-							<select class="form-control" id="oldpeak" name="oldpeak" required>
-								<option disabled selected value> -- Select an Option -- </option>
-								<option value="0">No</option>
-								<option value="1">Yes</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="form-group  row">
-						<div class="col-sm">
-							<label for="slope">Slope of the Peak Exercise ST Segment </label>
-							<select class="form-control" id="slope" name="slope" required>
-								<option disabled selected value> -- Select an Option -- </option>
-								<option value="0">Upsloping</option>
-								<option value="1">Flat</option>
-								<option value="2">Downsloping</option>
-							</select>
-						</div>
-						<div class="col-sm">
-							<label for="ca">Number of Vessels Colored by Flourosopy</label>
-							<select class="form-control" id="ca" name="ca" required>
-								<option disabled selected value> -- Select an Option -- </option>
-								<option value="0">0</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-							</select>
-						</div>
-						<div class="col-sm">
-							<label for="thal">Thalassemia</label>
-							<select class="form-control" id="thal" name="thal" required>
-								<option disabled selected value> -- Select an Option -- </option>
-								<option value="3">Normal</option>
-								<option value="6">Fixed defect</option>
-								<option value="7">Reversable defect</option>
-							</select>
-						</div>
-					</div>
-					<br>
+				<div class="form-group  row">
 					<div class="form-group">
-						<input class="btn btn-primary" type="submit" value="Submit">
+						<strong><label for="age">Age</label></strong>
+						<input type="number" class="form-control" id="age" name="age" required>
 					</div>
-
-					<!--Prediction Result-->
-					<div id="result">
-						<strong style="color:red">{{result}}</strong>
+					<div class="form-group">
+						<strong><label for="sex">Sex</label></strong>
+						<select class="form-control" id="sex" name="sex" required>
+							<option disabled selected value> -- Select an Option -- </option>
+							<option value="0">Male</option>
+							<option value="1">Female</option>
+						</select>
 					</div>
+				</div>
+				<br>
+				<div class="form-group  row">
+					<div class="form-group">
+						<strong><label for="cp">Chest Pain Type</label></strong>
+						<select class="form-control" id="cp" name="cp" required>
+							<option disabled selected value> -- Select an Option -- </option>
+							<option value="0">Typical Angina</option>
+							<option value="1">Atypical Angina</option>
+							<option value="2">Non-anginal Pain</option>
+							<option value="3">Asymptomatic</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<strong><label for="trestbps">Resting Blood Pressure in mm Hg</label></strong>
+						<input type="number" class="form-control" id="trestbps" name="trestbps" required>
+					</div>
+					<div class="form-group">
+						<strong><label for="chol">Serum Cholestoral in mg/dl</label></strong>
+						<input type="number" class="form-control" id="chol" name="chol" required>
+					</div>
+					<div class="form-group">
+						<strong><label for="fbs">Fasting Blood Sugar > 120 mg/dl</label></strong>
+						<select class="form-control" id="fbs" name="fbs" required>
+							<option disabled selected value> -- Select an Option -- </option>
+							<option value="0">False</option>
+							<option value="1">True</option>
+						</select>
+					</div>
+				</div>
+
+				<br>
+				<div class="form-group row">
+					<div class="form-group">
+						<strong><label for="restecg">Resting ECG Results </label></strong>
+						<select class="form-control" id="restecg" name="restecg" required>
+							<option disabled selected value> -- Select an Option -- </option>
+							<option value="0">Normal</option>
+							<option value="1">Having ST-T wave abnormality </option>
+							<option value="2"> Probable or definite left ventricular hypertrophy </option>
+						</select>
+					</div>
+					<div class="form-group">
+						<strong><label for="thalach">Maximum Heart Rate</label></strong>
+						<input type="number" class="form-control" id="thalach" name="thalach" required>
+					</div>
+					
+					<div class="form-group">
+						<strong><label for="exang">Exercise Induced Angina </label></strong>
+						<select class="form-control" id="exang" name="exang" required>
+							<option disabled selected value> -- Select an Option -- </option>
+							<option value="0">No</option>
+							<option value="1">Yes</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<strong><label for="oldpeak">ST Depression Induced</label></strong>
+						<input type="number" step="any" class="form-control" id="oldpeak" name="oldpeak" required>
+					</div>
+				</div>
+				<br>
+				<div class="form-group  row">
+					<div class="form-group">
+						<strong><label for="slope">Slope of the Peak Exercise ST Segment </label></strong>
+						<select class="form-control" id="slope" name="slope" required>
+							<option disabled selected value> -- Select an Option -- </option>
+							<option value="0">Upsloping</option>
+							<option value="1">Flat</option>
+							<option value="2">Downsloping</option>
+						</select>
+					</div>
+					<div class="form-group">
+					<strong><label for="ca">Number of Vessels Colored by Flourosopy</label></strong>
+						<select class="form-control" id="ca" name="ca" required>
+							<option disabled selected value> -- Select an Option -- </option>
+							<option value="0">0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</div>
+					<div class="form-group">
+					<strong><label for="thal">Thalassemia</label></strong>
+						<select class="form-control" id="thal" name="thal" required>
+							<option disabled selected value> -- Select an Option -- </option>
+							<option value="3">Normal</option>
+							<option value="6">Fixed defect</option>
+							<option value="7">Reversable defect</option>
+						</select>
+					</div>
+				</div>
+				<br>
+				<div class="form-group">
+					<input class="btn btn-danger" type="submit" value="Submit" >
+				</div>
 
 
-				</form>
-			</div>
+				
+
+			</form>
 		</div>
-		<div class="alert alert-primary mt-4" role="alert">
-			Citation: Mishra SR. Web application for cardiovascular disease modeling: beginner's guide. Kaggle. 2021.
-			Available from: <a href="https://www.kaggle.com/shivarajmishra/web-application-for-heart-disease-risk-in-ml"
-				class="alert-link"
-				target="_blank">https://www.kaggle.com/shivarajmishra/web-application-for-heart-disease-risk-in-ml</a>
-		</div>
-
-
 	</div>
+
+</div>
+</div>
 
 	<!-- Optional JavaScript; choose one of the two! -->
 
@@ -179,3 +197,4 @@
 </body>
 
 </html>
+
