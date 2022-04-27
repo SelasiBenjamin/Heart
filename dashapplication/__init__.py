@@ -106,7 +106,7 @@ def create_dash_application(flask_app):
                 ], width=7),
                 dbc.Col([
                     dcc.Graph(id='example-graph5',figure=fig5)
-                ], width=4),
+                ], width=5),
             ], align='center'),      
         ]), color = 'light'
     )
